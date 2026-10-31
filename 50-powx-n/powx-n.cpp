@@ -1,22 +1,28 @@
 class Solution {
 public:
-    double myPow(double x, int n) {
-        double ans=1;
-        long binary=n;
-        if(binary<0){
-            x=1/x;
-            binary=-binary;
+    long double power(long double x,long long n){
+        if(n==0){
+            return 1.0L;
         }
-        while(binary>0){
-            if(binary % 2 == 1){
-                ans=ans*x;
-                binary=binary-1;
-            }
-            else{
-                binary=binary/2;
-                x=x*x;
-            }
+
+        long double half=power(x,n/2);
+
+        if(n%2==0){
+            return half*half;
         }
-        return ans;
+
+        return half*half*x;
+    }
+
+    double myPow(double x,int n) {
+        long double num=x;
+        long long p=n;
+
+        if(p<0){
+            num=1.0L/num;
+            p=-p;
+        }
+
+        return (double)power(num,p);
     }
 };
